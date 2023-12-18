@@ -5,10 +5,8 @@ const sendButton = document.getElementById('send-button');
 sendButton.addEventListener('click', function() {
   const messageText = messageInput.value;
   if (messageText.trim()) {
-    // Add your message to the chat
-    addMessage(messageText, 'You');
-    // Simulate receiving a response message
-    setTimeout(function() {
+      addMessage(messageText, 'You');
+      setTimeout(function() {
       addMessage('Hello there!', 'Bot');
     }, 1000);
     messageInput.value = '';
