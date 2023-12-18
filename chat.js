@@ -3,9 +3,7 @@ const messageInput = document.getElementById('message-input');
 const sendButton = document.getElementById('send-button');
 const STORAGE_KEY = 'chat-history';
 function addMessage(text, sender) {
-  // ... existing message creation logic ...
-
-  // Create and stringify data object
+  
   const messageData = {
     text,
     sender,
@@ -16,7 +14,6 @@ function addMessage(text, sender) {
   // Get existing history, or create an empty array if absent
   const existingHistory = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
 
-  // Add new message to history and update storage
   existingHistory.push(messageData);
   localStorage.setItem(STORAGE_KEY, JSON.stringify(existingHistory));
 }
@@ -30,7 +27,6 @@ function loadChatHistory() {
   }
 }
 
-// Call the function when the app loads
 loadChatHistory();
 
 sendButton.addEventListener('click', function() {
