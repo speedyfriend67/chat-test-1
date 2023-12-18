@@ -1,6 +1,37 @@
 const messageList = document.getElementById('messages');
 const messageInput = document.getElementById('message-input');
 const sendButton = document.getElementById('send-button');
+const STORAGE_KEY = 'chat-history';
+function addMessage(text, sender) {
+  // ... existing message creation logic ...
+
+  // Create and stringify data object
+  const messageData = {
+    text,
+    sender,
+    timestamp: Date.now(),
+  };
+  const messageString = JSON.stringify(messageData);
+
+  // Get existing history, or create an empty array if absent
+  const existingHistory = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+
+  // Add new message to history and update storage
+  existingHistory.push(messageData);
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(existingHistory));
+}
+function loadChatHistory() {
+  const messageList = document.getElementById('messages');
+  const storedHistory = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+
+  // Loop through history and add messages to the list
+  for (const message of storedHistory) {
+    addMessage(message.text, message.sender);
+  }
+}
+
+// Call the function when the app loads
+loadChatHistory();
 
 sendButton.addEventListener('click', function() {
   const messageText = messageInput.value;
